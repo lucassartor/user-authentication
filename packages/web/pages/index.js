@@ -7,8 +7,8 @@ import {useRouter} from 'next/router'
 import jwt from 'jsonwebtoken';
 
 
-async function verifyToken() {
 
+async function verifyToken() {
     const router = useRouter();
 
      await fetch('http://localhost:1337/index', {
@@ -22,6 +22,7 @@ async function verifyToken() {
         },
         credentials: "same-origin"
     }).then((res) => {
+        console.log(res);
         return res.status === 200;
     }).catch(error => {
         console.log(error);
@@ -36,7 +37,7 @@ export default function Index() {
 
     if (!signedUp) {
         return (
-            <Container maxWidth="sm">
+            <Container maxWidth="sm" key="notLogged">
                 <Box my={4}>
                     <Typography variant="h4" component="h1" gutterBottom>
                         You are not signed in! <br/> Please
@@ -47,16 +48,31 @@ export default function Index() {
             </Container>
         )
     } else if (signedUp) {
-        return (
-            <Container maxWidth="sm">
-                <Box my={4}>
-                    <Typography variant="h4" component="h1" gutterBottom>
-                        You are signed in! <br/>
-                        Your email is: {jwt.decode(router.query.token).email}
-                    </Typography>
-                </Box>
-            </Container>
-        )
+        try {
+            return (
+                <Container maxWidth="sm" key="logged">
+                    <Box my={4}>
+                        <Typography variant="h4" component="h1" gutterBottom>
+                            You are signed in! <br/>
+                            Your email is: {jwt.decode(router.query.token).email}
+                        </Typography>
+                    </Box>
+                </Container>
+            )
+        }
+        catch (e) {
+            return (
+                <Container maxWidth="sm" key="notLogged">
+                    <Box my={4}>
+                        <Typography variant="h4" component="h1" gutterBottom>
+                            You are not signed in! <br/> Please
+                            <Link href="/signin" color="secondary"> Login </Link> or
+                            <Link href="/signup" color="secondary"> Create a user </Link>
+                        </Typography>
+                    </Box>
+                </Container>
+            )
+        }
     }
 
 }
