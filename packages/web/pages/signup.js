@@ -12,6 +12,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Favorite from "@material-ui/icons/Favorite";
 import {useRouter} from "next/router";
+import Breadcrumbs from "@material-ui/core/Breadcrumbs";
 
 
 
@@ -57,6 +58,12 @@ export default function SignUp() {
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline/>
+            <Breadcrumbs aria-label="breadcrumb" className={classes.breadcumbs}>
+                <Link color="inherit" href="/">
+                    Home
+                </Link>
+                <Typography color="textPrimary">Sign Up</Typography>
+            </Breadcrumbs>
             <div className={classes.paper}>
                 <Avatar className={classes.avatar}>
                     <LockOutlinedIcon/>
@@ -144,6 +151,12 @@ export default function SignUp() {
 
 
 const useStyles = makeStyles((theme) => ({
+    breadcumbs:{
+        marginTop: theme.spacing(4),
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+    },
     heart: {
         color: theme.palette.secondary.main,
         height: 18,

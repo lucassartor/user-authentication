@@ -84,6 +84,7 @@ module.exports = {
                             //TODO: Transformar essa chave (secret) em um .ENV
 
                             return res.status(200).json({
+                                status: 200,
                                 message: "Auth successful",
                                 token: token
                             })

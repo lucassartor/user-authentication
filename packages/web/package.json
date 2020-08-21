@@ -6,7 +6,8 @@
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
-    "clsx": "latest",
+    "clsx": "^1.1.1",
+    "jsonwebtoken": "^8.5.1",
     "next": "^9.5.2",
     "prop-types": "latest",
     "react": "^16.13.1",
@@ -18,4 +19,3 @@
     "start": "next start"
   }
 }
-

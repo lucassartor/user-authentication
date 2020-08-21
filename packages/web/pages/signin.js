@@ -12,6 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Favorite from '@material-ui/icons/Favorite';
+import Breadcrumbs from "@material-ui/core/Breadcrumbs";
 
 
 export default function SignIn() {
@@ -36,16 +37,21 @@ export default function SignIn() {
                 'Content-Type': 'application/json',
             },
             credentials: "same-origin"
-        }).then((res) => {
-            if (res.status === 200) {
-                alert("Login completed");
-                return router.push('../');
-            } else {
-                let error = new Error('Error ' + res.status + ': ' + res.statusText);
-                error.res = res;
-                alert("User does not exist");
-            }
-        }).catch(error => {
+        })  .then(res => res.json())
+            .then((res) => {
+                if (res.status === 200) {
+                    return router.push({
+                        pathname: "../",
+                        query: {
+                            token: res.token
+                        },
+                    });
+                } else {
+                    let error = new Error('Error ' + res.status + ': ' + res.statusText);
+                    error.res = res;
+                    alert("User does not exist");
+                }
+            }).catch(error => {
             console.log(error);
             if (error.status === 401)
                 alert("User does not exist");
@@ -54,8 +60,15 @@ export default function SignIn() {
 
 
     return (
+
         <Container component="main" maxWidth="xs">
             <CssBaseline/>
+            <Breadcrumbs aria-label="breadcrumb" className={classes.breadcumbs}>
+                <Link color="inherit" href="/">
+                    Home
+                </Link>
+                <Typography color="textPrimary">Login</Typography>
+            </Breadcrumbs>
             <div className={classes.paper}>
                 <Avatar className={classes.avatar} bgcolor="primary.main">
                     <LockOutlinedIcon/>
@@ -123,6 +136,12 @@ export default function SignIn() {
 
 
 const useStyles = makeStyles((theme) => ({
+    breadcumbs: {
+        marginTop: theme.spacing(4),
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+    },
     heart: {
         color: theme.palette.secondary.main,
         height: 18,
@@ -146,6 +165,7 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(3, 0, 2),
     },
 }));
+
 
 
 
