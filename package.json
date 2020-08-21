@@ -1,0 +1,13 @@
+{
+  "name": "user-auth",
+  "version": "1.0.0",
+  "main": "index.js",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  },
+  "author": "lucassartor <49413772+lucassartor@users.noreply.github.com>",
+  "license": "MIT"
+}
