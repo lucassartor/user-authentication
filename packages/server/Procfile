@@ -1,1 +1,1 @@
-web: yarn start
+web: yarn workspace @user-auth/server start
