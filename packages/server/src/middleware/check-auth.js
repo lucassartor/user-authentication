@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+require('dotenv/config');
 
 module.exports = (req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -7,14 +8,13 @@ module.exports = (req, res, next) => {
     res.setHeader('Access-Control-Allow-Headers', 'Origin, Content-Type, Accept, X-Auth-Token');
 
     try {
-        req.userData = jwt.verify(req.body.token, "secret");
+        req.userData = jwt.verify(req.body.token, process.env.APP_KEY);
         next();
     } catch (error) {
         return res.status(401).json({
             message: 'Auth Failed'
         });
     }
-    //TODO: Transformar essa chave (secret) em um .ENV
 
 
 };
