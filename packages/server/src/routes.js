@@ -5,6 +5,10 @@ const checkAuth = require('./middleware/check-auth');
 
 const routes = express.Router();
 
+routes.get('/', (req, res) =>{
+   res.json("pls work");
+});
+
 routes.post('/index', checkAuth, UserController.index);
 routes.post('/users/login', UserController.login);
 routes.post('/users/signup', UserController.store);
