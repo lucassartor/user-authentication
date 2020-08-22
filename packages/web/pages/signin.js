@@ -26,7 +26,7 @@ export default function SignIn() {
     function handleSubmit(event) {
         event.preventDefault();
 
-        fetch('http://localhost:1337/users/login', {
+        fetch('https://user-auth-backend-server.herokuapp.com/users/login', {
             method: "POST",
             body: JSON.stringify({
                 email,

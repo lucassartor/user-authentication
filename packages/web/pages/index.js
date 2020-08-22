@@ -11,7 +11,7 @@ import jwt from 'jsonwebtoken';
 async function verifyToken() {
     const router = useRouter();
 
-     await fetch('http://localhost:1337/index', {
+     await fetch('https://user-auth-backend-server.herokuapp.com/index', {
         method: "POST",
         body: JSON.stringify({
             token: router.query.token
